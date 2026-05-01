@@ -65,6 +65,7 @@ button{
 
 <body>
 
+<!-- 🎵 MUSIC (NEVER DESTROY THIS) -->
 <audio id="bgMusic" autoplay loop>
   <source src="beabadoobee-Coffee(Lyrics).mp3" type="audio/mpeg">
 </audio>
@@ -83,12 +84,16 @@ button{
 </div>
 
 <script>
-/* ===== MUSIC START ON CLICK (browser fix) ===== */
+
+/* 🎵 MUSIC SAFETY */
+const music = document.getElementById("bgMusic");
+music.loop = true;
+
 document.body.addEventListener("click", () => {
-  document.getElementById("bgMusic").play().catch(()=>{});
+  music.play().catch(()=>{});
 }, { once: true });
 
-/* ===== TYPING EFFECT ===== */
+/* ✍️ TYPING */
 const herName = "Princess";
 const typingText = `Hey ${herName} 💖 Wanna hang out tomorrow?`;
 let i = 0;
@@ -102,7 +107,7 @@ function typeWriter(){
 }
 typeWriter();
 
-/* ===== NO BUTTON RUN AWAY ===== */
+/* 🚀 NO BUTTON RUN */
 let noClicks = 0;
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
@@ -130,7 +135,7 @@ function moveNo(){
   noBtn.style.top = y + "px";
 }
 
-/* ===== FLOATING HEARTS (NO SOUND HERE!) ===== */
+/* 💖 FLOATING HEARTS */
 setInterval(() => {
   const heart = document.createElement("div");
   heart.className = "heart";
@@ -141,20 +146,21 @@ setInterval(() => {
   setTimeout(() => heart.remove(), 6000);
 }, 600);
 
-/* ===== YES BUTTON (FIXED: SOUND ONLY HERE) ===== */
+/* 🎉 YES BUTTON */
 yesBtn.addEventListener("click", () => {
 
+  music.play().catch(()=>{});
+
   const celebrationSound = document.getElementById("celebrationSound");
-  celebrationSound.currentTime = 0; // restart sound
+  celebrationSound.currentTime = 0;
   celebrationSound.play();
 
-document.getElementById("app").innerHTML = `
-  <div id="celebration" style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#ffe4ec;overflow:hidden;">
-    <h1 style="color:#ff4d88;font-size:3em;">YAYYY!! 🎉💖</h1>
-  </div>
-`;
+  document.getElementById("app").innerHTML = `
+    <div id="celebration" style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#ffe4ec;overflow:hidden;">
+      <h1 style="color:#ff4d88;font-size:3em;">YAYYY!! 🎉💖</h1>
+    </div>
+  `;
 
-  // confetti
   for(let i=0;i<100;i++){
     let confetti = document.createElement("div");
     confetti.innerHTML = "💖";
@@ -179,7 +185,7 @@ document.getElementById("app").innerHTML = `
   document.head.appendChild(style);
 
   setTimeout(() => {
-    document.body.innerHTML = `
+    document.getElementById("app").innerHTML = `
       <div style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#ffe4ec;">
         <h1 style="color:#ff4d88;">Our Plan 💌</h1>
         <p>📍 Place: Kids Land</p>
@@ -190,6 +196,7 @@ document.getElementById("app").innerHTML = `
     `;
   }, 3000);
 });
+
 </script>
 
 </body>
