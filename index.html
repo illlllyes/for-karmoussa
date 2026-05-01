@@ -51,8 +51,10 @@ button{
 
 .heart{
   position:absolute;
-  font-size:22px;
+  font-size:35px;
   animation:floatUp 6s linear infinite;
+  color:#ff2e8a;
+  filter: drop-shadow(0 0 5px pink);
 }
 
 @keyframes floatUp{
@@ -65,7 +67,7 @@ button{
 
 <body>
 
-<!-- 🎵 MUSIC (NEVER GETS DELETED) -->
+<!-- 🎵 MUSIC -->
 <audio id="bgMusic" loop>
   <source src="beabadoobee-Coffee(Lyrics).mp3" type="audio/mpeg">
 </audio>
@@ -85,16 +87,16 @@ button{
 
 <script>
 
+/* 🎵 MUSIC */
 const music = document.getElementById("bgMusic");
 music.loop = true;
-music.volume = 0.5;
+music.volume = 0.15; // 🔊 quiet music
 
-/* 🔊 MUST be triggered by user gesture */
 document.body.addEventListener("click", () => {
   music.play().catch(()=>{});
 }, { once: true });
 
-/* ✍️ typing effect */
+/* ✍️ typing */
 const herName = "Princess";
 const typingText = `Hey ${herName} 💖 Wanna hang out tomorrow?`;
 let i = 0;
@@ -140,7 +142,7 @@ function moveNo(){
 setInterval(() => {
   const heart = document.createElement("div");
   heart.className = "heart";
-  heart.innerText = "💗";
+  heart.innerText = "💖";
   heart.style.left = Math.random() * 100 + "vw";
   document.body.appendChild(heart);
 
@@ -150,28 +152,31 @@ setInterval(() => {
 /* 🎉 YES BUTTON */
 yesBtn.addEventListener("click", () => {
 
-  // 🔊 ensure music NEVER stops
   music.play().catch(()=>{});
 
   const sound = document.getElementById("celebrationSound");
+  sound.volume = 0.1; // 🔊 very quiet
   sound.currentTime = 0;
   sound.play();
 
-  document.getElementById("app").innerHTML = `
+  const app = document.getElementById("app");
+
+  app.innerHTML = `
     <div id="celebration" style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#ffe4ec;overflow:hidden;">
       <h1 style="color:#ff4d88;font-size:3em;">YAYYY!! 🎉💖</h1>
     </div>
   `;
 
-  // confetti
+  /* ✨ confetti */
   for(let i=0;i<100;i++){
     let confetti = document.createElement("div");
-    confetti.innerHTML = "💖";
+    confetti.innerHTML = "✨";
 
     confetti.style.position = "absolute";
     confetti.style.left = Math.random()*100 + "vw";
     confetti.style.top = "-10px";
-    confetti.style.fontSize = (Math.random()*20+10)+"px";
+    confetti.style.fontSize = (Math.random()*30 + 15) + "px";
+    confetti.style.color = "#ff4da6";
     confetti.style.animation = `fall ${Math.random()*3+2}s linear`;
 
     document.getElementById("celebration").appendChild(confetti);
@@ -187,9 +192,8 @@ yesBtn.addEventListener("click", () => {
   `;
   document.head.appendChild(style);
 
-  // final screen
   setTimeout(() => {
-    document.getElementById("app").innerHTML = `
+    app.innerHTML = `
       <div style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#ffe4ec;">
         <h1 style="color:#ff4d88;">Our Plan 💌</h1>
         <p>📍 Place: Kids Land</p>
@@ -198,7 +202,6 @@ yesBtn.addEventListener("click", () => {
         <h2>Can't wait 😍</h2>
       </div>
     `;
-    music.play().catch(()=>{});
   }, 3000);
 
 });
