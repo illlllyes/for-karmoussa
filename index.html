@@ -123,7 +123,7 @@ noBtn.addEventListener("click", () => {
   if(noClicks == 1) noBtn.innerText = "Are you sure? 😢";
   else if(noClicks == 2) noBtn.innerText = "Really sure?? 🥺";
   else if(noClicks == 3) noBtn.innerText = "Last chance 😭";
-  else noBtn.innerText = "Impossible 😈";
+  else noBtn.innerText = "Impossible ";
 
   yesBtn.style.transform = `scale(${1 + noClicks * 0.3})`;
   moveNo();
