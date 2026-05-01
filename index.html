@@ -65,8 +65,8 @@ button{
 
 <body>
 
-<!-- 🎵 MUSIC (NEVER DESTROY THIS) -->
-<audio id="bgMusic" autoplay loop>
+<!-- 🎵 MUSIC (NEVER GETS DELETED) -->
+<audio id="bgMusic" loop>
   <source src="beabadoobee-Coffee(Lyrics).mp3" type="audio/mpeg">
 </audio>
 
@@ -85,15 +85,16 @@ button{
 
 <script>
 
-/* 🎵 MUSIC SAFETY */
 const music = document.getElementById("bgMusic");
 music.loop = true;
+music.volume = 0.5;
 
+/* 🔊 MUST be triggered by user gesture */
 document.body.addEventListener("click", () => {
   music.play().catch(()=>{});
 }, { once: true });
 
-/* ✍️ TYPING */
+/* ✍️ typing effect */
 const herName = "Princess";
 const typingText = `Hey ${herName} 💖 Wanna hang out tomorrow?`;
 let i = 0;
@@ -107,7 +108,7 @@ function typeWriter(){
 }
 typeWriter();
 
-/* 🚀 NO BUTTON RUN */
+/* 😢 NO button */
 let noClicks = 0;
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
@@ -135,7 +136,7 @@ function moveNo(){
   noBtn.style.top = y + "px";
 }
 
-/* 💖 FLOATING HEARTS */
+/* 💖 hearts */
 setInterval(() => {
   const heart = document.createElement("div");
   heart.className = "heart";
@@ -149,11 +150,12 @@ setInterval(() => {
 /* 🎉 YES BUTTON */
 yesBtn.addEventListener("click", () => {
 
+  // 🔊 ensure music NEVER stops
   music.play().catch(()=>{});
 
-  const celebrationSound = document.getElementById("celebrationSound");
-  celebrationSound.currentTime = 0;
-  celebrationSound.play();
+  const sound = document.getElementById("celebrationSound");
+  sound.currentTime = 0;
+  sound.play();
 
   document.getElementById("app").innerHTML = `
     <div id="celebration" style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#ffe4ec;overflow:hidden;">
@@ -161,6 +163,7 @@ yesBtn.addEventListener("click", () => {
     </div>
   `;
 
+  // confetti
   for(let i=0;i<100;i++){
     let confetti = document.createElement("div");
     confetti.innerHTML = "💖";
@@ -184,6 +187,7 @@ yesBtn.addEventListener("click", () => {
   `;
   document.head.appendChild(style);
 
+  // final screen
   setTimeout(() => {
     document.getElementById("app").innerHTML = `
       <div style="height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#ffe4ec;">
@@ -191,10 +195,12 @@ yesBtn.addEventListener("click", () => {
         <p>📍 Place: Kids Land</p>
         <p>⏰ Time: 5:00 PM</p>
         <p>Games, rides & snacks</p>
-        <h2 style="margin-top:20px;">Can't wait 😍</h2>
+        <h2>Can't wait 😍</h2>
       </div>
     `;
+    music.play().catch(()=>{});
   }, 3000);
+
 });
 
 </script>
