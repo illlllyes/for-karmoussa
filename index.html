@@ -90,7 +90,7 @@ button{
 /* 🎵 MUSIC */
 const music = document.getElementById("bgMusic");
 music.loop = true;
-music.volume = 0.15; // 🔊 quiet music
+music.volume = 0.30; // 🔊 quiet music
 
 document.body.addEventListener("click", () => {
   music.play().catch(()=>{});
@@ -142,7 +142,7 @@ function moveNo(){
 setInterval(() => {
   const heart = document.createElement("div");
   heart.className = "heart";
-  heart.innerText = "💖";
+  heart.innerText = "💗";
   heart.style.left = Math.random() * 100 + "vw";
   document.body.appendChild(heart);
 
@@ -170,7 +170,7 @@ yesBtn.addEventListener("click", () => {
   /* ✨ confetti */
   for(let i=0;i<100;i++){
     let confetti = document.createElement("div");
-    confetti.innerHTML = "✨";
+    confetti.innerHTML = "💖";
 
     confetti.style.position = "absolute";
     confetti.style.left = Math.random()*100 + "vw";
